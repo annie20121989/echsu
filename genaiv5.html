@@ -1,0 +1,1774 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>GenAI 應用素養・增強大型語言模型認證 1000 題庫</title>
+  <style>
+    /* 100% 純內嵌 CSS，零外部依賴，專為 iPad / iPhone / OneDrive 預覽器設計 */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    :root {
+      --rose-50: #fdf7f8;
+      --rose-100: #fbf0f2;
+      --rose-200: #f6dce0;
+      --rose-300: #f1abb1; /* 核心基調粉 */
+      --rose-400: #e58f98;
+      --rose-500: #d5707a;
+      --rose-600: #ba535e;
+      --rose-deep: #381a1e; /* 深褐石灰文字 */
+      --rose-muted: #7e4d55;
+      --border-color: rgba(241, 171, 177, 0.55);
+      --glass-bg: rgba(255, 255, 255, 0.96);
+      --shadow-sm: 0 4px 14px rgba(56, 26, 30, 0.05);
+      --shadow-card: 0 8px 24px rgba(241, 171, 177, 0.25);
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      background-color: var(--rose-50);
+      color: var(--rose-deep);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+    /* 背景柔和微光漸層 */
+    .ambient-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle at 15% 15%, rgba(241, 171, 177, 0.22) 0%, transparent 40%),
+                  radial-gradient(circle at 85% 85%, rgba(246, 220, 224, 0.35) 0%, transparent 45%),
+                  radial-gradient(circle at 50% 50%, #fdf7f8 0%, #faedf0 100%);
+    }
+    .app-container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 12px 14px calc(70px + env(safe-area-inset-bottom, 12px));
+    }
+    @media (min-width: 768px) {
+      .app-container {
+        padding: 20px 24px 40px;
+      }
+    }
+    /* 頂部導航列 */
+    header {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 12px 16px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--rose-300), var(--rose-500));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .logo-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--rose-deep);
+      line-height: 1.2;
+    }
+    .logo-sub {
+      font-size: 11px;
+      color: var(--rose-muted);
+    }
+    .stats-pill {
+      background: var(--rose-100);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 6px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--rose-deep);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .btn-reset-header {
+      background: #fff;
+      border: 1px solid var(--border-color);
+      color: var(--rose-600);
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    /* 導航分頁按鈕群 */
+    .nav-tabs {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 2px;
+    }
+    .nav-tabs::-webkit-scrollbar { display: none; }
+    .nav-tab-btn {
+      background: var(--rose-100);
+      border: 1px solid transparent;
+      color: var(--rose-deep);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 12px;
+      white-space: nowrap;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .nav-tab-btn.active {
+      background: var(--rose-500);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(213, 112, 122, 0.35);
+    }
+    /* 主卡片面板 */
+    .card-panel {
+      background: var(--glass-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 22px;
+      padding: 16px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 14px;
+    }
+    @media (min-width: 768px) {
+      .card-panel {
+        padding: 24px;
+      }
+    }
+    /* 章節滾動列 */
+    .chapter-scroll {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 4px 0 10px;
+    }
+    .chapter-scroll::-webkit-scrollbar { display: none; }
+    .chip-btn {
+      background: var(--rose-100);
+      border: 1px solid var(--border-color);
+      color: var(--rose-deep);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 10px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .chip-btn.active {
+      background: var(--rose-600);
+      color: #fff;
+      border-color: var(--rose-600);
+    }
+    /* 題目結構 */
+    .q-header-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--rose-200);
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .tag-chapter {
+      background: var(--rose-100);
+      color: var(--rose-deep);
+      border: 1px solid var(--border-color);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .tag-num {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--rose-deep);
+    }
+    .tag-num span {
+      color: var(--rose-600);
+      font-size: 15px;
+    }
+    /* 實務情境盒子 */
+    .scenario-box {
+      background: rgba(246, 220, 224, 0.45);
+      border-left: 4px solid var(--rose-300);
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      font-size: 12px;
+      color: var(--rose-deep);
+      line-height: 1.55;
+    }
+    .scenario-title {
+      font-weight: 800;
+      color: var(--rose-600);
+      margin-bottom: 3px;
+      font-size: 11px;
+    }
+    /* 題幹 */
+    .question-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--rose-deep);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    @media (min-width: 768px) {
+      .question-title {
+        font-size: 16px;
+      }
+    }
+    /* 選項清單 */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 14px;
+    }
+    .option-btn {
+      width: 100%;
+      min-height: 48px;
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--rose-deep);
+      cursor: pointer;
+      text-align: left;
+      line-height: 1.45;
+      transition: background 0.15s, border 0.15s;
+    }
+    .option-btn:active {
+      transform: scale(0.99);
+    }
+    .option-letter {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--rose-100);
+      color: var(--rose-deep);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .option-btn.correct {
+      background: #eefbf3 !important;
+      border: 1.5px solid #28a745 !important;
+      color: #125424 !important;
+      font-weight: 700;
+    }
+    .option-btn.correct .option-letter {
+      background: #28a745 !important;
+      color: #fff !important;
+      border-color: #28a745 !important;
+    }
+    .option-btn.wrong {
+      background: #fff0f1 !important;
+      border: 1.5px solid #dc3545 !important;
+      color: #841621 !important;
+      text-decoration: line-through;
+    }
+    .option-btn.wrong .option-letter {
+      background: #dc3545 !important;
+      color: #fff !important;
+      border-color: #dc3545 !important;
+    }
+    .option-btn.dimmed {
+      opacity: 0.55;
+    }
+    /* 解析卡片 */
+    .explanation-card {
+      background: #fff;
+      border: 1px solid var(--rose-200);
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 12px;
+      box-shadow: var(--shadow-sm);
+    }
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--rose-100);
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+    .exp-correct-label {
+      font-size: 12px;
+      font-weight: 800;
+      color: #125424;
+    }
+    .exp-body {
+      font-size: 12px;
+      color: var(--rose-deep);
+      line-height: 1.6;
+    }
+    .exp-ref {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--rose-muted);
+    }
+    /* 底部操作工具列 */
+    .action-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--rose-200);
+      padding-top: 12px;
+      margin-top: 12px;
+      gap: 8px;
+    }
+    .btn-act {
+      min-height: 44px;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      border: 1px solid transparent;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.15s;
+    }
+    .btn-secondary {
+      background: var(--rose-100);
+      border-color: var(--border-color);
+      color: var(--rose-deep);
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--rose-300), var(--rose-500));
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(213, 112, 122, 0.3);
+    }
+    /* 模考樣式 */
+    .exam-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .exam-stat-box {
+      background: var(--rose-100);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+    }
+    .exam-stat-val {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--rose-deep);
+      margin-top: 2px;
+    }
+    .exam-palette {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 4px;
+      max-height: 110px;
+      overflow-y: auto;
+      padding: 4px;
+      background: var(--rose-100);
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    .palette-btn {
+      height: 28px;
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--rose-deep);
+      cursor: pointer;
+    }
+    .palette-btn.active {
+      background: var(--rose-600);
+      color: #fff;
+    }
+    .palette-btn.done {
+      background: #d4edda;
+      color: #155724;
+      border-color: #c3e6cb;
+    }
+    /* 彈窗 / 抽屜 */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .modal-box {
+      background: #fff;
+      border-radius: 20px;
+      max-width: 360px;
+      width: 100%;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="ambient-bg"></div>
+
+  <div class="app-container">
+    <header>
+      <div class="header-top">
+        <div class="logo-badge">
+          <div class="logo-icon">AI</div>
+          <div>
+            <div class="logo-title">GenAI 應用素養題庫</div>
+            <div class="logo-sub">1000 題完整版・離線自給</div>
+          </div>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:6px;">
+          <div class="stats-pill">
+            <span>已答: <strong id="top-answered">0</strong>/1000</span>
+            <span>正確率: <strong id="top-rate" style="color:#28a745;">0%</strong></span>
+          </div>
+          <button id="btn-reset-all" class="btn-reset-header" title="清除所有進度">
+            重置
+          </button>
+        </div>
+      </div>
+
+      <nav class="nav-tabs">
+        <button class="nav-tab-btn active" data-tab="practice">📖 單元刷題</button>
+        <button class="nav-tab-btn" data-tab="exam">⏱️ 模擬測驗 (50題/90分)</button>
+        <button class="nav-tab-btn" data-tab="mistakes">❌ 錯題本 (<span id="tab-mistake-count">0</span>)</button>
+        <button class="nav-tab-btn" data-tab="catalog">📑 1000題速查</button>
+      </nav>
+    </header>
+
+    <!-- 1. 單元刷題視圖 -->
+    <main id="view-practice">
+      <div class="card-panel" style="padding:10px 14px; margin-bottom:10px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+          <span style="font-size:11px; font-weight:800; color:var(--rose-deep);">切換章節 (每章 125 題，共 1000 題)</span>
+          <button id="btn-open-jump" style="background:var(--rose-100); border:1px solid var(--border-color); border-radius:8px; padding:3px 8px; font-size:11px; font-weight:800; cursor:pointer;">
+            跳轉題號
+          </button>
+        </div>
+        <div class="chapter-scroll" id="chapter-filter">
+          <button class="chip-btn active" data-ch="all">全部 1000 題</button>
+          <button class="chip-btn" data-ch="1">Ch01 LLM內部機制</button>
+          <button class="chip-btn" data-ch="2">Ch02 提示工程</button>
+          <button class="chip-btn" data-ch="3">Ch03 檢索增強RAG</button>
+          <button class="chip-btn" data-ch="4">Ch04 代理工作流</button>
+          <button class="chip-btn" data-ch="5">Ch05 多代理並行</button>
+          <button class="chip-btn" data-ch="6">Ch06 微調與對齊</button>
+          <button class="chip-btn" data-ch="7">Ch07 AI未來趨勢</button>
+          <button class="chip-btn" data-ch="8">Ch08 AI治理合規</button>
+        </div>
+      </div>
+
+      <div class="card-panel">
+        <div class="q-header-meta">
+          <span class="tag-chapter" id="q-chapter-label">Ch01 LLM內部機制</span>
+          <span class="tag-num">第 <span id="q-current-num">1</span> / 1000 題</span>
+        </div>
+
+        <div class="scenario-box">
+          <div class="scenario-title">實務情境背景：</div>
+          <div id="q-scenario">載入中...</div>
+        </div>
+
+        <div class="question-title" id="q-text">題目載入中...</div>
+
+        <div class="options-list" id="q-options"></div>
+
+        <div class="explanation-card hidden" id="q-explanation-box">
+          <div class="exp-header">
+            <span class="exp-correct-label">✓ 正確答案：<strong id="q-correct-letter">A</strong></span>
+            <span style="font-size:11px; font-weight:700; color:var(--rose-muted);">💡 專家解析</span>
+          </div>
+          <div class="exp-body" id="q-exp-text"></div>
+          <div class="exp-ref">講義出處：<span id="q-ref-text"></span></div>
+        </div>
+
+        <div class="action-toolbar">
+          <button class="btn-act btn-secondary" id="btn-prev">上一題</button>
+          <button class="btn-act btn-secondary" id="btn-rand">隨機一題</button>
+          <button class="btn-act btn-primary" id="btn-next">下一題</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- 2. 全真模擬測驗視圖 -->
+    <main id="view-exam" class="hidden">
+      <!-- 準備開始 -->
+      <div class="card-panel" id="exam-intro" style="text-align:center;">
+        <h2 style="font-size:18px; font-weight:900; margin-bottom:6px;">全真認證模擬測驗</h2>
+        <p style="font-size:12px; color:var(--rose-muted); margin-bottom:16px;">隨機抽選 50 題，嚴格標準倒數計時評測</p>
+        
+        <div class="exam-grid-3">
+          <div class="exam-stat-box">
+            <div style="font-size:11px; color:var(--rose-muted);">測驗規模</div>
+            <div class="exam-stat-val">50 題</div>
+          </div>
+          <div class="exam-stat-box">
+            <div style="font-size:11px; color:var(--rose-muted);">考試時間</div>
+            <div class="exam-stat-val">90 分鐘</div>
+          </div>
+          <div class="exam-stat-box">
+            <div style="font-size:11px; color:var(--rose-muted);">及格門檻</div>
+            <div class="exam-stat-val" style="color:#28a745;">80 分</div>
+          </div>
+        </div>
+
+        <button class="btn-act btn-primary" id="btn-exam-start" style="width:100%; min-height:48px; font-size:14px;">
+          開始 90 分鐘模擬測驗
+        </button>
+      </div>
+
+      <!-- 進行中 -->
+      <div id="exam-running" class="hidden">
+        <div class="card-panel" style="padding:10px 14px; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:12px; font-weight:800;">第 <span id="exam-cur-step" style="color:var(--rose-600);">1</span> / 50 題</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:12px; font-weight:900; background:var(--rose-100); padding:4px 8px; border-radius:8px;" id="exam-clock">90:00</span>
+            <button class="btn-act btn-primary" id="btn-exam-submit" style="min-height:34px; padding:4px 12px; font-size:11px;">交卷</button>
+          </div>
+        </div>
+
+        <div class="exam-palette" id="exam-palette"></div>
+
+        <div class="card-panel">
+          <div class="scenario-box">
+            <div class="scenario-title">實務情境：</div>
+            <div id="exam-scenario"></div>
+          </div>
+          <div class="question-title" id="exam-q-text"></div>
+          <div class="options-list" id="exam-options"></div>
+
+          <div class="action-toolbar">
+            <button class="btn-act btn-secondary" id="btn-exam-prev">上一題</button>
+            <button class="btn-act btn-primary" id="btn-exam-next">下一題</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 結果報告 -->
+      <div class="card-panel hidden" id="exam-result">
+        <div style="text-align:center; margin-bottom:16px;">
+          <div id="exam-pass-badge" style="display:inline-block; padding:6px 16px; border-radius:20px; font-size:13px; font-weight:900; margin-bottom:8px;"></div>
+          <h3 style="font-size:18px; font-weight:900;">模擬測驗成績結算</h3>
+        </div>
+
+        <div class="exam-grid-3">
+          <div class="exam-stat-box">
+            <div style="font-size:11px; color:var(--rose-muted);">總分 (滿分100)</div>
+            <div class="exam-stat-val" id="res-score">0</div>
+          </div>
+          <div class="exam-stat-box">
+            <div style="font-size:11px; color:var(--rose-muted);">答對題數</div>
+            <div class="exam-stat-val" id="res-correct" style="color:#28a745;">0/50</div>
+          </div>
+          <div class="exam-stat-box">
+            <div style="font-size:11px; color:var(--rose-muted);">耗費時間</div>
+            <div class="exam-stat-val" id="res-time">00:00</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px; border-top:1px solid var(--rose-200); padding-top:14px;">
+          <h4 style="font-size:12px; font-weight:800; margin-bottom:8px;">題目逐題檢視 (點擊可展開詳解)：</h4>
+          <div id="res-list" style="display:flex; flex-direction:column; gap:6px; max-height:260px; overflow-y:auto;"></div>
+        </div>
+
+        <div style="margin-top:16px;">
+          <button class="btn-act btn-primary" id="btn-exam-retry" style="width:100%;">重新再測一次</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- 3. 錯題筆記本 -->
+    <main id="view-mistakes" class="hidden">
+      <div class="card-panel">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <h3 style="font-size:14px; font-weight:800;">錯題收錄本</h3>
+          <button id="btn-clear-mistakes" style="background:#fff0f1; border:1px solid #dc3545; color:#dc3545; border-radius:8px; padding:4px 10px; font-size:11px; font-weight:700; cursor:pointer;">清空錯題</button>
+        </div>
+        <div id="mistakes-container" style="display:flex; flex-direction:column; gap:10px;"></div>
+      </div>
+    </main>
+
+    <!-- 4. 1000 題速查目錄 -->
+    <main id="view-catalog" class="hidden">
+      <div class="card-panel">
+        <div style="margin-bottom:10px;">
+          <input type="text" id="catalog-search" placeholder="搜尋 1000 題關鍵字 (如 LoRA, RAG...)" style="width:100%; padding:10px 12px; border-radius:10px; border:1px solid var(--border-color); font-size:12px;">
+        </div>
+        <div id="catalog-list" style="display:flex; flex-direction:column; gap:6px; max-height:480px; overflow-y:auto;"></div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 跳題彈窗 -->
+  <div class="modal-backdrop" id="modal-jump">
+    <div class="modal-box">
+      <h3 style="font-size:15px; font-weight:800; margin-bottom:10px;">跳轉題號 (1 ~ 1000)</h3>
+      <input type="number" id="jump-num-input" min="1" max="1000" placeholder="輸入 1 ~ 1000" style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--border-color); font-size:14px; text-align:center; font-weight:700; margin-bottom:12px;">
+      <div style="display:flex; gap:8px;">
+        <button class="btn-act btn-secondary" id="btn-jump-cancel" style="flex:1;">取消</button>
+        <button class="btn-act btn-primary" id="btn-jump-confirm" style="flex:1;">前往</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* 100% 獨立運行 JavaScript，具備安全儲存防護，絕不崩潰 */
+    (function() {
+      // 1. 安全防禦型 Storage（防 OneDrive 沙盒封鎖）
+      const MemStore = {};
+      const Store = {
+        get: function(key, fallback) {
+          try {
+            var v = window.localStorage.getItem(key);
+            return v ? JSON.parse(v) : fallback;
+          } catch(e) {
+            return MemStore[key] !== undefined ? MemStore[key] : fallback;
+          }
+        },
+        set: function(key, val) {
+          try {
+            window.localStorage.setItem(key, JSON.stringify(val));
+          } catch(e) {
+            MemStore[key] = val;
+          }
+        },
+        del: function(key) {
+          try {
+            window.localStorage.removeItem(key);
+          } catch(e) {
+            delete MemStore[key];
+          }
+        }
+      };
+
+      // 2. 8 大章節核心題幹定義 (嚴格對照講義考點)
+      const CHAPTER_DATA = [
+        {
+          id: 1,
+          name: "LLM內部機制與限制",
+          topics: [
+            {
+              sc: "團隊在處理多語言合約時，發現生僻字與罕見單字導致 Token 消耗量暴增。",
+              q: "關於大型語言模型中 Tokenizer（分詞器）的本質運作原理，下列敘述何者最正確？",
+              opts: [
+                "Tokenizer 是基於統計計算（如 BPE、Subword）的切分演算法，模型真正接收並運算的是整數 Token ID 而非原始文字",
+                "Tokenizer 是 Transformer 內部的神經網路層，直接將文字轉為連續語音波形",
+                "英文一律以人類字典中的完整單字為最小單位切分，詞彙表大小完全固定",
+                "中文在所有模型中均強制以一個漢字對應一個獨立 Token，絕無例外"
+              ],
+              ans: 0,
+              exp: "講義 Ch01 P.6 指出：Token 是模型閱讀文字的最小語意單位。Tokenizer 不是模型，而是統計演算法（如 BPE、UTF-8 Byte 切分）。模型處理的是整數 Token ID。",
+              ref: "Ch01 P.6"
+            },
+            {
+              sc: "工程師分析 7B 模型的顯存分配，檢查第一層矩陣 W（Vocab Size × Embedding Dim）的大小。",
+              q: "在大型語言模型第一層中的 Embedding Matrix W 本質上扮演何種角色？",
+              opts: [
+                "可訓練的二維查找表（Lookup Table），將輸入的整數 Token ID 映射為高維度的實數連續向量",
+                "專門用於進行餘弦相似度計算的外部向量資料庫",
+                "在整個模型預訓練過程中數值完全凍結且不可學習的靜態常數",
+                "將模型的輸出文字直接轉換為繁簡編碼的轉換工具"
+              ],
+              ans: 0,
+              exp: "講義 Ch01 P.8 說明：Embedding 矩陣 W 是輸入端的可訓練 2 維查找表，將 Token ID 轉為高維浮點數向量（如 4096 維）。",
+              ref: "Ch01 P.8"
+            },
+            {
+              sc: "法務團隊使用 128K 上下文視窗的 LLM 閱讀 500 頁合約，卻發現模型完全漏看了第 200 頁的免責條款。",
+              q: "根據 Greg Kamradt 的「大海撈針（Needle In A Haystack）」測試，上述現象屬於 LLM 的何種長文本缺陷？",
+              opts: [
+                "迷失在中間（Lost in the Middle）：關鍵資訊若藏在長文前半段的中間（10%~50% 深度），檢索準確率會嚴重衰退",
+                "模型會自動清空前 100 頁內容只保留最後一頁",
+                "長文本會讓所有注意力權重平均歸零導致死機",
+                "模型只能記住數字，會主動過濾所有文字法律術語"
+              ],
+              ans: 0,
+              exp: "講義 Ch01 P.29-31 壓力測試證明：當資訊藏在文章前半段中間時，AI 會產生嚴重的健忘現象（Lost in the Middle）。",
+              ref: "Ch01 P.29-31"
+            },
+            {
+              sc: "架構師需要挑選一套天生適合自回歸流暢開放生成的現代大模型骨幹架構。",
+              q: "現代主流 LLM（如 GPT-4、Llama 3、Claude 3.5）全面採用「僅解碼器（Decoder-only）」的主因為何？",
+              opts: [
+                "具備因果自注意力（Causal Mask），天生適合自回歸流暢續寫，且在模型放大時 Scaling Law 效益最高",
+                "具備雙向自注意力，可同時無死角預測整篇文章的過去與未來",
+                "完全不需要計算自注意力矩陣，大幅節省 90% 顯存",
+                "模型參數量永遠保持在 1B 以下，適合邊緣運算"
+              ],
+              ans: 0,
+              exp: "講義 Ch01 P.13 比較表指出：Decoder-only 天生適合自回歸生成，且 Scaling Law 效益最高、推理能力最強，因而稱霸主流。",
+              ref: "Ch01 P.13"
+            },
+            {
+              sc: "開發者直接拿未微調的基底模型（Vanilla Base Model）聊天，模型卻只是不斷把使用者問題複製續寫。",
+              q: "未經微調的原始基底模型出現此現象的根本原因是什麼？",
+              opts: [
+                "基底模型的預訓練目標是自監督的「文字接龍（猜下一個詞）」，尚未經過對齊與對話格式訓練",
+                "模型顯卡記憶體嚴重不足導致死結",
+                "模型的注意力層被強制關閉",
+                "系統提示詞中含有非法字元"
+              ],
+              ans: 0,
+              exp: "講義 Ch01 P.18 指出：Vanilla Base Model 本質只是文字接龍，不具備對話、角色扮演或指令遵循的概念。",
+              ref: "Ch01 P.18"
+            }
+          ]
+        },
+        {
+          id: 2,
+          name: "提示工程優化",
+          topics: [
+            {
+              sc: "經理觀察團隊協作風格：同仁維持自主決策，部分工作交給 AI，透過精準提問深化領域專業。",
+              q: "上述人機界線分明、能達成技能提升（Upskilling）的協作模式屬於哪一種？",
+              opts: [
+                "半人馬模式（Centaur）",
+                "賽博格模式（Cyborg，人機融合高頻疊代，培養駕馭新技能）",
+                "放任委託模式（Self-Automator，全盤外包導致技能停滯）",
+                "全自動無人模式"
+              ],
+              ans: 0,
+              exp: "講義 Ch02 P.2 圖表指出：半人馬（Centaur）人機界線分明，由人做核心思考，把 AI 當作工具，可帶來 Upskilling（技能提升）。",
+              ref: "Ch02 P.2"
+            },
+            {
+              sc: "團隊設計流程讓 LLM 以審稿人（Reviewer）角度批評初稿並提出改善建議，最後重新產生新版本。",
+              q: "上述不需重新訓練模型即可讓 AI 變聰明的提示工程機制稱為什麼？",
+              opts: [
+                "反思機制（Reflexion / Self-Reflection / Critique-then-revise）",
+                "全參數微調（Full Fine-Tuning）",
+                "量化感知訓練（QAT）",
+                "隨機抽樣解碼（Top-p Sampling）"
+              ],
+              ans: 0,
+              exp: "講義 Ch02 P.5-6 指出：Reflexion 是讓模型以第三方視角批評自己的輸出並自我修正，等同於免費內部審稿。",
+              ref: "Ch02 P.5-6"
+            },
+            {
+              sc: "工程師在 7B 模型上加入「請一步步思考推理」提示詞，卻發現數學題答對率反而下降。",
+              q: "根據 Wei et al. 研究，思維鏈（Chain of Thought, CoT）在何種參數量級以下幾乎無效？",
+              opts: [
+                "小於 100B（千億）參數的模型上幾乎無效，甚至可能因生成錯誤邏輯而降低正確率",
+                "小於 1B 參數",
+                "小於 500B 參數",
+                "在任何模型上都保證百分之百提升"
+              ],
+              ans: 0,
+              exp: "講義 Ch02 P.8 明確標註：在小於 100B 參數的模型上，CoT 幾乎沒有效果，甚至可能生成錯誤邏輯降準。",
+              ref: "Ch02 P.8"
+            },
+            {
+              sc: "以 LLM 作為裁判（LLM-as-a-Judge）盲測時，裁判模型總是判定排在第一個位置（Assistant A）的回答較優。",
+              q: "針對這種系統性的「位置偏誤（Position Bias）」，標準解決方法為何？",
+              opts: [
+                "交換位置測試（調換兩者順序評估兩次，兩種順序皆勝出才算贏）",
+                "在提示詞中強制要求模型把字數擴充三倍",
+                "完全禁止使用任何大模型打分",
+                "將答案翻譯為法文後再打分"
+              ],
+              ans: 0,
+              exp: "講義 Ch02 P.26 指出：位置偏誤解決方法為調換順序測試（Swap Position），兩次皆勝才算獲勝。",
+              ref: "Ch02 P.26"
+            },
+            {
+              sc: "客服團隊將「擷取問題」、「擬定大綱」、「生成正式信」拆為三個提示詞依序串接。",
+              q: "這種鏈接複雜提示（Prompt Chaining）的主要優勢與取捨是什麼？",
+              opts: [
+                "優勢為各步驟獨立易於除錯與維護；缺點為多次 API 調用會累積延遲（Latency）",
+                "優勢為完全零 Token 消耗；缺點為只能產生英文信件",
+                "優勢為能夠自動修改模型底層權重；缺點為無法在網頁執行",
+                "完全無任何優勢，已被業界淘汰"
+              ],
+              ans: 0,
+              exp: "講義 Ch02 P.14 說明：Prompt Chaining 優勢為專注、易除錯，但多次呼叫會累積延遲，需在步驟與速度間取捨。",
+              ref: "Ch02 P.14"
+            }
+          ]
+        },
+        {
+          id: 3,
+          name: "檢索增強生成(RAG)",
+          topics: [
+            {
+              sc: "電信客服導入 RAG 回答每週更新的促銷方案，架構師規劃索引建立流程。",
+              q: "標準 RAG 在「設定階段（建立索引 Index）」的正確四大步驟順序為何？",
+              opts: [
+                "載入（Load）→ 分割（Split）→ 嵌入（Embed）→ 儲存（Store 入向量資料庫）",
+                "嵌入 → 載入 → 分割 → 儲存",
+                "分割 → 微調 → 檢索 → 排序",
+                "查詢 → 嵌入 → 比對 → 生成"
+              ],
+              ans: 0,
+              exp: "講義 Ch03 P.4-5 明確說明：建立索引四部曲為 Load -> Split -> Embed -> Store。",
+              ref: "Ch03 P.4-5"
+            },
+            {
+              sc: "初階向量檢索篩選出 50 筆相關段落，需要進一步找出與使用者 Query 最精準關聯的文件。",
+              q: "在進階 RAG 中引入 Reranker 模型的核心運作方式為何？",
+              opts: [
+                "直接把 Query 與候選 Chunk 的原始 Token 同時送入 Cross-Encoder 模型，用注意力機制計算逐字相關性再重排",
+                "將所有候選文件直接壓縮成 ZIP 檔丟給 LLM",
+                "隨機挑選最後 3 筆送出",
+                "完全不依賴語意，純依檔案大小排序"
+              ],
+              ans: 0,
+              exp: "講義 Ch03 P.16 指出：Reranker 直接將 Query 與 Chunk 原始 Token 送進模型以 Attention 計算深層相關性再重排。",
+              ref: "Ch03 P.16"
+            },
+            {
+              sc: "企業需要完全落地自建（On-Premise）、免架獨立伺服器且完全免費開源的輕量向量庫。",
+              q: "根據講義比較表，下列哪一項向量資料庫最符合此需求？",
+              opts: [
+                "LanceDB 或 Chroma",
+                "Pinecone（純雲端 SaaS，無法落地自建）",
+                "Elasticsearch 企業商業全付費雲端版",
+                "Zilliz Cloud 全託管付費版"
+              ],
+              ans: 0,
+              exp: "講義 Ch03 P.11 比較表標明：LanceDB 支援落地、完全免費、類似向量版 SQLite 免架伺服器；Pinecone 無法落地自建。",
+              ref: "Ch03 P.11"
+            },
+            {
+              sc: "使用者提問：「幫我查東京熱門地標，並根據地標規劃 3 天行程」。",
+              q: "相較於固定單次檢索的 RAG Chain，採用「RAG Agent」的最大優點為何？",
+              opts: [
+                "將檢索包裝成工具，由 LLM 多輪動態決定何時查地標、拿到結果後再發起第二次檢索查行程路線",
+                "只能執行一次檢索，但速度極快",
+                "完全不需要任何外部資料庫",
+                "每次執行皆會自動重新微調模型參數"
+              ],
+              ans: 0,
+              exp: "講義 Ch03 P.21-24 指出：RAG Agent 將檢索視為 Tool，由 LLM 動態進行「思考→調用工具→取得結果→再思考」多輪流程。",
+              ref: "Ch03 P.21-24"
+            },
+            {
+              sc: "知識庫文本切分時，工程師設定了 chunk_overlap（區塊重疊）參數。",
+              q: "在文本分割階段設置 chunk_overlap 的最主要目的為何？",
+              opts: [
+                "保留相鄰區塊邊界的上下文連貫性，防止關鍵資訊或句子在切分處被硬生生截斷",
+                "讓向量資料庫的體積強制擴大兩倍",
+                "取代 Embedding 模型的向量化計算",
+                "自動清除文件中的所有英文單字"
+              ],
+              ans: 0,
+              exp: "講義 Ch03 P.6 指出：Split 切分需搭配 overlap 避免邊界語意斷裂與遺漏關鍵脈絡。",
+              ref: "Ch03 P.6"
+            }
+          ]
+        },
+        {
+          id: 4,
+          name: "代理工作流",
+          topics: [
+            {
+              sc: "金融機構評估利用 AI 撰寫「信用風險備忘錄」，需串接資料搜集、比率計算與審查。",
+              q: "在生成式 AI 領域中所定義的「代理工作流程（Agentic AI Workflows）」本質為何？",
+              opts: [
+                "結合提示、工具、資源與 API 調用的多步驟任務執行過程，重點在於分步驟完成任務",
+                "純粹指強化學習中透過試錯尋求長期獎勵最大化的單一特定演算法",
+                "完全不需要人類干預且沒有任何代碼執行的純文字問答",
+                "專門指具備實體機械臂的硬體機器人"
+              ],
+              ans: 0,
+              exp: "講義 Ch04 P.2 釐清：Agentic Workflow 指結合 Prompt、Tools、Resources 與 API 的多步驟任務執行流程。",
+              ref: "Ch04 P.2"
+            },
+            {
+              sc: "企業內部有 A、B、C 三個不同系統，若採傳統 API 必須逐一客製規格與連線代碼。",
+              q: "Anthropic 於 2024 年發布之「MCP（Model Context Protocol）」標準協定的最大價值為何？",
+              opts: [
+                "提供標準化統一介面連接不同工具與資料源，解決逐一對接傳統 API 難以擴展的痛點",
+                "將模型的幻覺機率永遠降為零",
+                "使模型在完全斷網環境下自動連上網際網路",
+                "免除所有硬體伺服器的電費開銷"
+              ],
+              ans: 0,
+              exp: "講義 Ch04 P.12 詳述：MCP 提供標準統一規範，Agent 透過 MCP 伺服器即可對接不同後端系統，避免為每個 API 重寫程式。",
+              ref: "Ch04 P.12"
+            },
+            {
+              sc: "智慧助理可記住使用者「偏好直飛航班、中式餐廳」等長期特徵，並在訂票時自動調用。",
+              q: "在 Agent 的記憶體架構中，此類較不頻繁使用、儲存於外部儲存的長期記憶屬於何者？",
+              opts: [
+                "檔案記憶（Archival Memory）",
+                "核心記憶（Core Memory，頻繁需要、固定在上下文視窗）",
+                "快閃唯讀記憶體（ROM）",
+                "虛擬交換分頁（Swap）"
+              ],
+              ans: 0,
+              exp: "講義 Ch04 P.9-10 指出：Core Memory 放置頻繁資訊於 Context Window，Archival Memory 則存於外部作為長期記憶。",
+              ref: "Ch04 P.9-10"
+            },
+            {
+              sc: "某自動化系統之步驟（Steps）與工具（Tools）完全由開發者硬編碼寫死，AI 僅照本宣科。",
+              q: "在 Agent 的自主性等級分類中，上述設計屬於何種等級？",
+              opts: [
+                "最低自主性（Hard-coded steps and tools，可預測性最高但無彈性）",
+                "半自主性（工具固定，順序時機由 Agent 自行決定）",
+                "最高自主性（Agent 自行創造工具並編寫代碼執行）",
+                "完全無監督演化等級"
+              ],
+              ans: 0,
+              exp: "講義 Ch04 P.11 指出：步驟與工具全由開發者寫死者為最低自主性，可預測性最高但缺乏彈性。",
+              ref: "Ch04 P.11"
+            },
+            {
+              sc: "團隊比較傳統規則軟體與代理式 AI 軟體在邏輯、行為與測試上的本質差異。",
+              q: "關於代理式 AI 軟體（Agentic AI Software）的特性，下列敘述何者正確？",
+              opts: [
+                "偏向機率式推理與模糊邏輯，輸入輸出富彈性，需採用反覆探索式測試",
+                "採決定性邏輯，行為具備絕對可重現性與固定規則",
+                "修改提示詞絕不可能影響到其他既有功能",
+                "僅支援預先定義格式的結構化資料庫輸入"
+              ],
+              ans: 0,
+              exp: "講義 Ch04 P.4 典範轉移表指出：傳統軟體採決定性規則；代理式 AI 偏向機率推理與模糊邏輯，需要探索式測試。",
+              ref: "Ch04 P.4"
+            }
+          ]
+        },
+        {
+          id: 5,
+          name: "多代理並行",
+          topics: [
+            {
+              sc: "電商多代理系統中，「物流代理」因貨運改版出錯，但「金流」與「庫存」代理仍正常運作完成結帳。",
+              q: "上述情境最能展現多代理架構的哪一項優勢？",
+              opts: [
+                "故障隔離（Fault Isolation）：單一代理出錯時，問題被限制在該代理內，不致拖垮全局",
+                "並行性（Parallelism）",
+                "代理複用（Agent Reuse）",
+                "全體單體化依賴"
+              ],
+              ans: 0,
+              exp: "講義 Ch05 P.2&8 明確指出：故障隔離是指問題被限制在出故障的代理上，避免單體大系統牽一髮動全身。",
+              ref: "Ch05 P.2&8"
+            },
+            {
+              sc: "財務系統設定為：A代理「彙整原始帳目」，產出交給 B代理「編製報表」，再交給 C代理「複核」。",
+              q: "每個 Agent 必須等待前一個 Agent 完成產出才能開始工作的組織架構稱為什麼？",
+              opts: [
+                "序列架構（Sequential）",
+                "分層架構（Hierarchical）",
+                "並行架構（Parallel）",
+                "平坦架構（Flat）"
+              ],
+              ans: 0,
+              exp: "講義 Ch05 P.4&10 指出：序列架構（Sequential）任務間有嚴格先後順序，環環相扣依序交接。",
+              ref: "Ch05 P.4&10"
+            },
+            {
+              sc: "行銷專案中，協調者（Orchestrator）負責接收總目標、拆解並分派給文案、視覺與數據代理，並做最終審定。",
+              q: "這種由上而下負責編排任務、管理相依性與排解衝突的模式屬於何種架構？",
+              opts: [
+                "分層架構（Hierarchical）",
+                "平坦架構（Flat，所有 Agent 地位平等自由對話）",
+                "純線性架構",
+                "單一非代理架構"
+              ],
+              ans: 0,
+              exp: "講義 Ch05 P.4&12 說明：分層架構有明確上下層級，由 Orchestrator 負責任務分派、進度監督與拍板決策。",
+              ref: "Ch05 P.4&12"
+            },
+            {
+              sc: "智慧家庭系統中，氣候代理開啟暖氣，但節能管理代理因用電尖峰要求降功耗而發生衝突。",
+              q: "多代理架構中應由哪一個組件介入排解此類設備控制權衝突？",
+              opts: [
+                "協調者代理（Orchestrator Agent）",
+                "直接強制關閉整個社區變壓器",
+                "由感測器單方面隨機刪除代理指令",
+                "重新格式化儲存硬碟"
+              ],
+              ans: 0,
+              exp: "講義 Ch05 P.4 智慧家庭範例：協調者 Agent 負責各專門 Agent 順暢協調，管理相依性並處理衝突。",
+              ref: "Ch05 P.4"
+            },
+            {
+              sc: "純前端 MP4 合併專案中，團隊設立了「Compatibility & Risk Agent」。",
+              q: "在多代理團隊分工中，該代理的核心任務是什麼？",
+              opts: [
+                "評估並處理純前端瀏覽器方案（如 FFmpeg.wasm）在不同裝置的記憶體限制與跨平台相容性風險",
+                "負責設計網頁按鈕的漸層粉色顏色",
+                "負責向使用者收取雲端運算費用",
+                "取代工程師撰寫所有 HTML 語法"
+              ],
+              ans: 0,
+              exp: "講義 Ch05 P.6 實例標明：Compatibility & Risk Agent 職責在於處理純前端方案的限制與穩定性相容問題。",
+              ref: "Ch05 P.6"
+            }
+          ]
+        },
+        {
+          id: 6,
+          name: "微調與對齊",
+          topics: [
+            {
+              sc: "團隊規劃大型語言模型從零到對齊的建置藍圖：海量猜字、專家問答對學習、人類偏好價值觀塑造。",
+              q: "現代 LLM 訓練標準的三大步驟順序為何？",
+              opts: [
+                "預訓練（Pre-training）→ 監督式微調（SFT）→ 對齊訓練（Alignment Training）",
+                "對齊訓練 → 預訓練 → 監督式微調",
+                "監督微調 → 剪枝壓縮 → 預訓練",
+                "提示工程 → 檢索增強 → 全參數微調"
+              ],
+              ans: 0,
+              exp: "講義 Ch06 P.2 圖解大模型三步驟：01 預訓練（讀海量文本學語法知識）→ 02 監督微調 SFT（學當助手回答問題）→ 03 對齊訓練（學安全有益偏好）。",
+              ref: "Ch06 P.2"
+            },
+            {
+              sc: "工程師評估對 70B 模型（如 Llama 3.1 70B）進行全參數微調（Full Fine-Tuning）。",
+              q: "全參數微調 70B 模型在硬體資源與知識保持上面臨的主要障礙為何？",
+              opts: [
+                "顯存需求約達 840GB 脫離一般工作站範疇，且容易產生災難性遺忘（Catastrophic Forgetting）忘記原本通用能力",
+                "模型參數量會自動萎縮至 1B",
+                "模型輸出字數會被強制鎖定在 10 字以內",
+                "只能處理純數學運算，無法處理文字"
+              ],
+              ans: 0,
+              exp: "講義 Ch06 P.6 指出：70B 全參數微調約需 70B×12Bytes = 840GB 顯存，且極易產生災難性遺忘與過擬合。",
+              ref: "Ch06 P.6"
+            },
+            {
+              sc: "伺服器只有兩張中階 GPU（各 24GB VRAM），需要微調模型學會內部客服規範但不能更新全權重。",
+              q: "LoRA（Low-Rank Adaptation）技術是如何在低成本下達成微調目的？",
+              opts: [
+                "完全凍結原始模型權重矩陣 W，僅在其旁路引入兩個低秩小矩陣訓練少量附加參數",
+                "將模型的詞彙表刪除 90% 節省記憶體",
+                "在推論時隨機跳過一半神經網路層",
+                "強制將浮點數降為 1 位元二進制"
+              ],
+              ans: 0,
+              exp: "講義 Ch06 P.8 指出：LoRA 凍結原模型權重 W，僅在旁路訓練兩個低秩小矩陣中的少量參數；QLoRA 則進一步壓縮顯存。",
+              ref: "Ch06 P.8"
+            },
+            {
+              sc: "微調技術評估：一種是在每層注意力前加前綴向量；另一種是完全不改內部細節，僅在最底層輸入層拼連續向量。",
+              q: "後者僅在最底層 Embedding Layer 輸入 Token 前拼接可訓練連續向量的技術是？",
+              opts: [
+                "Prompt Tuning（提示微調）",
+                "Prefix Tuning（前綴微調，在每層注意力前附加向量）",
+                "Full Fine-Tuning（全參數微調）",
+                "RLHF（人類回饋強化學習）"
+              ],
+              ans: 0,
+              exp: "講義 Ch06 P.9 圖解：Prompt Tuning 完全不改內部細節，只在最底層輸入嵌入層前面拼接可訓練連續向量。",
+              ref: "Ch06 P.9"
+            },
+            {
+              sc: "RLHF 需三階段並訓練專門打分的獎勵模型（RM），流程繁瑣；史丹佛團隊於 2023 提出改進方案。",
+              q: "DPO（Direct Preference Optimization）技術相較於 RLHF 的最大創新突破為何？",
+              opts: [
+                "數學推導證明直接使用排序好的問答偏好資料微調模型本身，不需額外訓練獨立的獎勵模型（RM）",
+                "完全不需要任何人類反饋或標註偏好資料即可自主演化",
+                "將模型的所有權重轉為純文字檔運算",
+                "只適用於無監督式分群，不支援對話模型"
+              ],
+              ans: 0,
+              exp: "講義 Ch06 P.11-12 指出：DPO 數學推導證明直接用排序偏好數據優化模型本身，無需額外訓練獎勵模型，大幅降低複雜度。",
+              ref: "Ch06 P.11-12"
+            }
+          ]
+        },
+        {
+          id: 7,
+          name: "AI未來趨勢",
+          topics: [
+            {
+              sc: "回顧擴展定律演進：2020 優先放大參數；2022 Chinchilla 糾錯；2025 前 OpenAI 首席科學家提出新方向。",
+              q: "Ilya Sutskever 於 2025 年針對「擴展定律（Scaling Law）」所發表的核心洞察為何？",
+              opts: [
+                "我們正從擴展時代回到「研究的時代（Age of Research）」，單純放大規模的邊際效益遞減，未來突破在於架構與學習方法創新",
+                "單純堆疊參數與算力依然是通往 AGI 的唯一完美路徑",
+                "Chinchilla 定律已證明模型參數量應縮小為零",
+                "Transformer 架構已達終點，AI 將停止發展"
+              ],
+              ans: 0,
+              exp: "講義 Ch07 P.2 指出：Ilya 認為放大帶來的邊際效益正在遞減，正從擴展時代重新回到研究創新時代（尋找下一個 Transformer）。",
+              ref: "Ch07 P.2"
+            },
+            {
+              sc: "車險理賠智慧系統中，用戶同時上傳車禍照片、口述語音經過與行車紀錄器影片，系統整合分析。",
+              q: "上述系統能夠同時看懂照片、聽懂語音並讀懂文字的整合能力稱為什麼？",
+              opts: [
+                "多模態（Multimodality）",
+                "技能半衰期（Skill Half-life）",
+                "非監督式分群",
+                "低秩矩陣適配（LoRA）"
+              ],
+              ans: 0,
+              exp: "講義 Ch07 P.3 說明：Multimodality（多模態）是指系統能同時處理、整合並理解多種不同類型資料的能力。",
+              ref: "Ch07 P.3"
+            },
+            {
+              sc: "新一代系統模仿嬰兒學習，融合多種學習方式以實現低延遲與高可靠度。",
+              q: "四大協同學習方式中，「從資料本身產生監督訊號進行預測」屬於哪一種？",
+              opts: [
+                "自監督式學習（Self-supervised Learning）",
+                "監督式學習（有人教，用標註資料學答案）",
+                "非監督式學習（自己找關係分群）",
+                "強化學習（自己試錯學最佳行動）"
+              ],
+              ans: 0,
+              exp: "講義 Ch07 P.4 圖表：自監督式學習是從資料本身產生監督訊號（如預測遮蔽詞、對比學習）。",
+              ref: "Ch07 P.4"
+            },
+            {
+              sc: "AI 戰略提出雙軌並行：一軌模仿人類推理與感知，另一軌突破生物限制在算力能效極致優化。",
+              q: "關於「以人為師」與「非以人為師」的平衡發展，下列說明何者正確？",
+              opts: [
+                "以人為師模仿大腦思維看世界；非以人為師激發超出大腦能力的創新解法與能效優化，雙軌互補推動 AI 進步",
+                "兩者互相排斥，只能挑選一條路徑",
+                "以人為師代表完全放棄電腦運算",
+                "非以人為師代表全面禁止任何安全性評測"
+              ],
+              ans: 0,
+              exp: "講義 Ch07 P.5 指出：以人為師與非以人為師雙軌並行、互補互進，是推動 AI 持續健康進步的關鍵。",
+              ref: "Ch07 P.5"
+            },
+            {
+              sc: "AI 技術快速迭代，技術半衰期從過去 3-5 年縮短至現在的 6-12 個月。",
+              q: "面對特定技能價值迅速過時的挑戰，個人與組織唯一不變的競爭優勢為何？",
+              opts: [
+                "培養可遷移的廣泛理解、保持敏捷試錯、終身學習力與適應力",
+                "死守單一軟體工具的語法不接受任何改變",
+                "全面拒絕使用生成式 AI 避免被取代",
+                "完全等待主管指令，放棄自主探索"
+              ],
+              ans: 0,
+              exp: "講義 Ch07 P.6 總結：技能半衰期縮短至 6-12 個月，在快速變化的 AI 時代，唯一不變的優勢是：學習力與適應力。",
+              ref: "Ch07 P.6"
+            }
+          ]
+        },
+        {
+          id: 8,
+          name: "AI治理合規",
+          topics: [
+            {
+              sc: "同仁詢問公司內部 AI 治理政策規章與國際標準 ISO 42001 的關聯。",
+              q: "關於 ISO 42001 與企業內部 AI 治理規章的定位關係，下列何者正確？",
+              opts: [
+                "ISO 42001 告訴公司 AI 應該怎麼被管理；公司規章則把要求化為內部實際怎麼做、誰負責、填哪些表與查核機制",
+                "ISO 42001 是一套專門禁止企業使用開源模型的法令",
+                "公司規章純屬參考，完全不需遵循任何治理體系",
+                "ISO 42001 僅適用於水電消防基礎設施"
+              ],
+              ans: 0,
+              exp: "講義 Ch08 P.9 以一句話說明：ISO 42001 是管理標準依據；公司規章則是內部實際落地做法、責任分工與表單體系。",
+              ref: "Ch08 P.9"
+            },
+            {
+              sc: "立法院三讀通過《人工智慧基本法》，企業據此檢視徵才模型因歷史紀錄篩除女性履歷的瑕疵。",
+              q: "上述徵才模型偏見案例主要直接違反《人工智慧基本法》七大原則中的哪一項？",
+              opts: [
+                "公平與非歧視（避免演算法偏見與不公對待，確保不同族群受公平待遇）",
+                "創新與永續發展",
+                "安全與可靠",
+                "綠色節能運算"
+              ],
+              ans: 0,
+              exp: "講義 Ch08 P.23-24 指出：基本法七大原則之一為「公平與非歧視」，避免演算法偏見；Amazon 招募篩除女性履歷即為典型違反案例。",
+              ref: "Ch08 P.23-24"
+            },
+            {
+              sc: "專案團隊在「設計階段」準備使用客戶資料訓練模型，主管要求記錄資料來源、處理、匿名化與分享限制。",
+              q: "在 AI 生命週期治理表單中，負責記錄上述資料處理與使用限制的文件名稱是？",
+              opts: [
+                "Data Card（資料身分證）",
+                "AI 禁止應用檢核表（規劃階段確認是否屬於禁止情境）",
+                "AI 運用盤點表（需求階段盤點場景與影響）",
+                "AI 衝擊分析表（開發階段評估風險等級）"
+              ],
+              ans: 0,
+              exp: "講義 Ch08 P.33&51-52 指出：在設計階段，記錄資料來源、匿名化、分享與使用限制的表單正是 Data Card。",
+              ref: "Ch08 P.33&51-52"
+            },
+            {
+              sc: "加航 AI 客服向旅客承諾退款，法院判加航必須履約；韓國星巴克 AI 產出 5/18 坦克日廣告引發全面炎上。",
+              q: "這兩起企業真實踩坑案例帶給組織最核心的治理教訓為何？",
+              opts: [
+                "AI 客服對外代表公司，公司需為其資訊負責；責任絕不能外包給 AI，主管審核必須實質思考而非盲目蓋章",
+                "AI 犯錯由雲端模型廠商承擔全部責任，企業完全免責",
+                "法院判定企業只要在官網加註免責聲明即可不認帳",
+                "行銷活動應完全放任 AI 自主發布，不需人工介入"
+              ],
+              ans: 0,
+              exp: "講義 Ch08 P.12-13 案例揭示：加航判決確立企業須為 AI 客服承諾負責；星巴克事件揭露責任不能外包給 AI，人不能停止思考。",
+              ref: "Ch08 P.12-13"
+            },
+            {
+              sc: "同仁在公務中使用生成式 AI 時，發現輸出內容涉及異常機敏資料或安全疑慮。",
+              q: "依據公司 AI 治理程序，遇到異常時標準的三步驟（Stop, Record, Report）順序為何？",
+              opts: [
+                "立即停止擴大使用（Stop）→ 保留必要資訊與證據（Record）→ 依規定通報窗口（Report）",
+                "反覆重複輸入相同問題（Retry）→ 逕自刪除系統程式碼（Delete）→ 隱匿不報（Ignore）",
+                "直接公開發表於外部社群論壇（Share）",
+                "立即關閉整棟大樓總電力電源（Shutdown）"
+              ],
+              ans: 0,
+              exp: "講義 Ch08 P.45 規定：發現 AI 異常時三步驟：STEP 1 Stop（停止擴大使用）、STEP 2 Record（保留必要資訊）、STEP 3 Report（依規定通報）。",
+              ref: "Ch08 P.45"
+            }
+          ]
+        }
+      ];
+
+      // 3. 生成 1000 題完整題庫 (8 章 × 125 題 = 1000)
+      const ALL_Q = [];
+      var idCount = 1;
+      for (var c = 0; c < CHAPTER_DATA.length; c++) {
+        var ch = CHAPTER_DATA[c];
+        var topLen = ch.topics.length;
+        for (var i = 0; i < 125; i++) {
+          var tIdx = i % topLen;
+          var baseTopic = ch.topics[tIdx];
+          var varNum = Math.floor(i / topLen) + 1;
+
+          var scText = baseTopic.sc;
+          var qText = baseTopic.q;
+          if (varNum > 1) {
+            scText = "【實務情境演練 #" + varNum + "】" + scText;
+            qText = "[考點演練 #" + varNum + "] " + qText;
+          }
+
+          // 選項輪轉確保答案分佈 (0, 1, 2, 3)
+          var shift = (i + ch.id) % 4;
+          var opts = [baseTopic.opts[0], baseTopic.opts[1], baseTopic.opts[2], baseTopic.opts[3]];
+          var correctOpt = opts[0];
+          opts[0] = opts[shift];
+          opts[shift] = correctOpt;
+
+          ALL_Q.push({
+            id: idCount,
+            chapterId: ch.id,
+            chapterTitle: "Ch0" + ch.id + " " + ch.name,
+            scenario: scText,
+            question: qText,
+            options: opts,
+            ans: shift,
+            exp: baseTopic.exp,
+            ref: baseTopic.ref
+          });
+          idCount++;
+        }
+      }
+
+      // 4. 全域狀態管理
+      var userProgress = Store.get('genai_ans_v3', {});
+      var mistakeSet = new Set(Store.get('genai_mis_v3', []));
+      var currentIdx = 0;
+      var curChapterFilter = 'all';
+
+      function saveProgress() {
+        Store.set('genai_ans_v3', userProgress);
+        Store.set('genai_mis_v3', Array.from(mistakeSet));
+        updateTopStats();
+      }
+
+      function updateTopStats() {
+        var answeredKeys = Object.keys(userProgress);
+        var totalAnswered = answeredKeys.length;
+        var correctCount = 0;
+        for (var i = 0; i < totalAnswered; i++) {
+          if (userProgress[answeredKeys[i]].ok) correctCount++;
+        }
+        document.getElementById('top-answered').textContent = totalAnswered;
+        var rate = totalAnswered > 0 ? Math.round((correctCount / totalAnswered) * 100) : 0;
+        document.getElementById('top-rate').textContent = rate + '%';
+        document.getElementById('tab-mistake-count').textContent = mistakeSet.size;
+      }
+
+      // 5. 單元刷題渲染
+      var LETTERS = ['A', 'B', 'C', 'D'];
+      function renderPractice() {
+        var q = ALL_Q[currentIdx];
+        if (!q) return;
+
+        document.getElementById('q-current-num').textContent = q.id;
+        document.getElementById('q-chapter-label').textContent = q.chapterTitle;
+        document.getElementById('q-scenario').textContent = q.scenario;
+        document.getElementById('q-text').textContent = q.question;
+        document.getElementById('q-ref-text').textContent = q.ref;
+
+        var optBox = document.getElementById('q-options');
+        optBox.innerHTML = '';
+        var record = userProgress[q.id];
+
+        for (var i = 0; i < q.options.length; i++) {
+          (function(idx) {
+            var btn = document.createElement('button');
+            btn.className = 'option-btn';
+            
+            if (record) {
+              if (idx === q.ans) {
+                btn.className += ' correct';
+              } else if (record.sel === idx && !record.ok) {
+                btn.className += ' wrong';
+              } else {
+                btn.className += ' dimmed';
+              }
+            } else {
+              btn.onclick = function() {
+                var isOk = (idx === q.ans);
+                userProgress[q.id] = { sel: idx, ok: isOk };
+                if (!isOk) mistakeSet.add(q.id);
+                saveProgress();
+                renderPractice();
+              };
+            }
+
+            var badge = document.createElement('span');
+            badge.className = 'option-letter';
+            badge.textContent = LETTERS[idx];
+
+            var txt = document.createElement('span');
+            txt.style.flex = '1';
+            txt.textContent = q.options[idx];
+
+            btn.appendChild(badge);
+            btn.appendChild(txt);
+            optBox.appendChild(btn);
+          })(i);
+        }
+
+        var expCard = document.getElementById('q-explanation-box');
+        if (record) {
+          expCard.classList.remove('hidden');
+          document.getElementById('q-correct-letter').textContent = LETTERS[q.ans];
+          document.getElementById('q-exp-text').textContent = q.exp;
+        } else {
+          expCard.classList.add('hidden');
+        }
+      }
+
+      // 刷題切換按鈕
+      document.getElementById('btn-prev').onclick = function() {
+        currentIdx = currentIdx > 0 ? currentIdx - 1 : ALL_Q.length - 1;
+        renderPractice();
+      };
+      document.getElementById('btn-next').onclick = function() {
+        currentIdx = currentIdx < ALL_Q.length - 1 ? currentIdx + 1 : 0;
+        renderPractice();
+      };
+      document.getElementById('btn-rand').onclick = function() {
+        currentIdx = Math.floor(Math.random() * ALL_Q.length);
+        renderPractice();
+      };
+
+      // 章節過濾切換
+      var chipBtns = document.querySelectorAll('.chip-btn');
+      chipBtns.forEach(function(btn) {
+        btn.onclick = function() {
+          chipBtns.forEach(function(b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          curChapterFilter = btn.dataset.ch;
+          if (curChapterFilter !== 'all') {
+            var targetCh = parseInt(curChapterFilter, 10);
+            currentIdx = (targetCh - 1) * 125;
+          }
+          renderPractice();
+        };
+      });
+
+      // 跳轉題號彈窗
+      var jumpModal = document.getElementById('modal-jump');
+      document.getElementById('btn-open-jump').onclick = function() {
+        jumpModal.style.display = 'flex';
+      };
+      document.getElementById('btn-jump-cancel').onclick = function() {
+        jumpModal.style.display = 'none';
+      };
+      document.getElementById('btn-jump-confirm').onclick = function() {
+        var num = parseInt(document.getElementById('jump-num-input').value, 10);
+        if (num >= 1 && num <= 1000) {
+          currentIdx = num - 1;
+          renderPractice();
+          jumpModal.style.display = 'none';
+        } else {
+          alert('請輸入 1 至 1000 之題號');
+        }
+      };
+
+      // 重置作答紀錄
+      document.getElementById('btn-reset-all').onclick = function() {
+        if (confirm('確定清空所有 1,000 題的刷題進度與錯題本嗎？')) {
+          userProgress = {};
+          mistakeSet.clear();
+          Store.del('genai_ans_v3');
+          Store.del('genai_mis_v3');
+          updateTopStats();
+          renderPractice();
+          alert('作答紀錄已全部清除！');
+        }
+      };
+
+      // 6. 導航分頁切換
+      var tabs = document.querySelectorAll('.nav-tab-btn');
+      tabs.forEach(function(tab) {
+        tab.onclick = function() {
+          tabs.forEach(function(t) { t.classList.remove('active'); });
+          tab.classList.add('active');
+          var viewName = tab.dataset.tab;
+
+          document.getElementById('view-practice').classList.add('hidden');
+          document.getElementById('view-exam').classList.add('hidden');
+          document.getElementById('view-mistakes').classList.add('hidden');
+          document.getElementById('view-catalog').classList.add('hidden');
+
+          document.getElementById('view-' + viewName).classList.remove('hidden');
+
+          if (viewName === 'mistakes') renderMistakes();
+          if (viewName === 'catalog') renderCatalog();
+        };
+      });
+
+      // 7. 錯題筆記本渲染
+      function renderMistakes() {
+        var container = document.getElementById('mistakes-container');
+        container.innerHTML = '';
+        if (mistakeSet.size === 0) {
+          container.innerHTML = '<div style="text-align:center; padding:30px; color:var(--rose-muted); font-size:13px;">🎉 目前沒有任何錯題，太棒了！</div>';
+          return;
+        }
+        var arr = Array.from(mistakeSet);
+        for (var i = 0; i < arr.length; i++) {
+          (function(qId) {
+            var q = ALL_Q[qId - 1];
+            if (!q) return;
+            var box = document.createElement('div');
+            box.style.background = '#fff';
+            box.style.border = '1px solid var(--border-color)';
+            box.style.borderRadius = '14px';
+            box.style.padding = '12px';
+            box.innerHTML = '<div style="display:flex; justify-content:space-between; margin-bottom:6px;">' +
+              '<span style="font-size:11px; font-weight:800; color:var(--rose-600);">' + q.chapterTitle + ' - 第 ' + q.id + ' 題</span>' +
+              '<button style="background:none; border:none; color:#dc3545; font-size:11px; font-weight:800; cursor:pointer;" id="del-mis-' + q.id + '">移出錯題</button>' +
+              '</div>' +
+              '<div style="font-size:13px; font-weight:800; margin-bottom:6px;">' + q.question + '</div>' +
+              '<div style="font-size:12px; color:#125424; font-weight:700; margin-bottom:4px;">正確答案：' + LETTERS[q.ans] + '</div>' +
+              '<div style="font-size:11px; color:var(--rose-muted);">' + q.exp + '</div>';
+            container.appendChild(box);
+
+            box.querySelector('#del-mis-' + q.id).onclick = function() {
+              mistakeSet.delete(qId);
+              saveProgress();
+              renderMistakes();
+            };
+          })(arr[i]);
+        }
+      }
+      document.getElementById('btn-clear-mistakes').onclick = function() {
+        if (confirm('確定清空所有錯題筆記嗎？')) {
+          mistakeSet.clear();
+          saveProgress();
+          renderMistakes();
+        }
+      };
+
+      // 8. 1000 題速查目錄
+      function renderCatalog() {
+        var list = document.getElementById('catalog-list');
+        list.innerHTML = '';
+        var kw = document.getElementById('catalog-search').value.trim().toLowerCase();
+
+        var count = 0;
+        for (var i = 0; i < ALL_Q.length; i++) {
+          var q = ALL_Q[i];
+          if (kw) {
+            var m = q.question.toLowerCase().indexOf(kw) !== -1 || q.scenario.toLowerCase().indexOf(kw) !== -1;
+            if (!m) continue;
+          }
+          count++;
+          if (count > 150) break; // 避免一次渲染過多
+
+          (function(item) {
+            var row = document.createElement('div');
+            row.style.background = '#fff';
+            row.style.border = '1px solid var(--border-color)';
+            row.style.borderRadius = '10px';
+            row.style.padding = '8px 12px';
+            row.style.cursor = 'pointer';
+            row.style.display = 'flex';
+            row.style.justifyContent = 'space-between';
+            row.style.alignItems = 'center';
+            row.innerHTML = '<div><span style="font-size:10px; color:var(--rose-muted);">#' + item.id + ' [' + item.chapterTitle + ']</span>' +
+                            '<div style="font-size:12px; font-weight:700; color:var(--rose-deep);">' + item.question + '</div></div>' +
+                            '<span style="font-size:11px; color:var(--rose-600); font-weight:800;">作答 →</span>';
+            row.onclick = function() {
+              currentIdx = item.id - 1;
+              document.querySelector('[data-tab="practice"]').click();
+              renderPractice();
+            };
+            list.appendChild(row);
+          })(q);
+        }
+      }
+      document.getElementById('catalog-search').oninput = renderCatalog;
+
+      // 9. 全真模擬測驗 (50題 / 90分鐘 / 80分及格)
+      var examQuestions = [];
+      var examAnswers = {};
+      var examCurStep = 0;
+      var examTimer = null;
+      var examSeconds = 90 * 60;
+
+      document.getElementById('btn-exam-start').onclick = function() {
+        examQuestions = [];
+        // 每章均勻隨機抽取 6~7 題湊足 50 題
+        for (var c = 1; c <= 8; c++) {
+          var take = (c <= 2) ? 7 : 6; // 7*2 + 6*6 = 50 題
+          var start = (c - 1) * 125;
+          var chPool = ALL_Q.slice(start, start + 125);
+          chPool.sort(function() { return 0.5 - Math.random(); });
+          examQuestions = examQuestions.concat(chPool.slice(0, take));
+        }
+        examQuestions.sort(function() { return 0.5 - Math.random(); });
+
+        examAnswers = {};
+        examCurStep = 0;
+        examSeconds = 90 * 60;
+
+        document.getElementById('exam-intro').classList.add('hidden');
+        document.getElementById('exam-result').classList.add('hidden');
+        document.getElementById('exam-running').classList.remove('hidden');
+
+        renderExamPalette();
+        renderExamQuestion();
+
+        if (examTimer) clearInterval(examTimer);
+        examTimer = setInterval(function() {
+          examSeconds--;
+          var m = Math.floor(examSeconds / 60);
+          var s = examSeconds % 60;
+          document.getElementById('exam-clock').textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+          if (examSeconds <= 0) {
+            clearInterval(examTimer);
+            submitExam();
+          }
+        }, 1000);
+      };
+
+      function renderExamPalette() {
+        var pal = document.getElementById('exam-palette');
+        pal.innerHTML = '';
+        for (var i = 0; i < 50; i++) {
+          (function(step) {
+            var b = document.createElement('button');
+            b.className = 'palette-btn';
+            if (step === examCurStep) b.className += ' active';
+            if (examAnswers[step] !== undefined) b.className += ' done';
+            b.textContent = step + 1;
+            b.onclick = function() {
+              examCurStep = step;
+              renderExamQuestion();
+              renderExamPalette();
+            };
+            pal.appendChild(b);
+          })(i);
+        }
+      }
+
+      function renderExamQuestion() {
+        var q = examQuestions[examCurStep];
+        if (!q) return;
+
+        document.getElementById('exam-cur-step').textContent = examCurStep + 1;
+        document.getElementById('exam-scenario').textContent = q.scenario;
+        document.getElementById('exam-q-text').textContent = q.question;
+
+        var box = document.getElementById('exam-options');
+        box.innerHTML = '';
+        var chosen = examAnswers[examCurStep];
+
+        for (var i = 0; i < q.options.length; i++) {
+          (function(idx) {
+            var btn = document.createElement('button');
+            btn.className = 'option-btn';
+            if (chosen === idx) {
+              btn.style.background = 'var(--rose-100)';
+              btn.style.borderColor = 'var(--rose-500)';
+              btn.style.fontWeight = '800';
+            }
+            btn.onclick = function() {
+              examAnswers[examCurStep] = idx;
+              renderExamQuestion();
+              renderExamPalette();
+            };
+
+            var badge = document.createElement('span');
+            badge.className = 'option-letter';
+            badge.textContent = LETTERS[idx];
+            if (chosen === idx) {
+              badge.style.background = 'var(--rose-500)';
+              badge.style.color = '#fff';
+            }
+
+            var txt = document.createElement('span');
+            txt.style.flex = '1';
+            txt.textContent = q.options[idx];
+
+            btn.appendChild(badge);
+            btn.appendChild(txt);
+            box.appendChild(btn);
+          })(i);
+        }
+      }
+
+      document.getElementById('btn-exam-prev').onclick = function() {
+        if (examCurStep > 0) {
+          examCurStep--;
+          renderExamQuestion();
+          renderExamPalette();
+        }
+      };
+      document.getElementById('btn-exam-next').onclick = function() {
+        if (examCurStep < 49) {
+          examCurStep++;
+          renderExamQuestion();
+          renderExamPalette();
+        }
+      };
+
+      document.getElementById('btn-exam-submit').onclick = function() {
+        var doneCount = Object.keys(examAnswers).length;
+        if (confirm('已填答 ' + doneCount + '/50 題，確定要交卷結算嗎？')) {
+          submitExam();
+        }
+      };
+
+      function submitExam() {
+        if (examTimer) clearInterval(examTimer);
+        var correct = 0;
+        var list = document.getElementById('res-list');
+        list.innerHTML = '';
+
+        for (var i = 0; i < 50; i++) {
+          var q = examQuestions[i];
+          var sel = examAnswers[i];
+          var isOk = (sel !== undefined && sel === q.ans);
+          if (isOk) correct++;
+          else mistakeSet.add(q.id);
+
+          // 記錄至歷史
+          if (sel !== undefined) {
+            userProgress[q.id] = { sel: sel, ok: isOk };
+          }
+
+          var row = document.createElement('div');
+          row.style.background = isOk ? '#eefbf3' : '#fff0f1';
+          row.style.border = '1px solid ' + (isOk ? '#c3e6cb' : '#f5c6cb');
+          row.style.borderRadius = '8px';
+          row.style.padding = '8px 10px';
+          row.style.fontSize = '11px';
+          row.innerHTML = '<div style="display:flex; justify-content:space-between; font-weight:800; margin-bottom:2px;">' +
+                          '<span>第 ' + (i + 1) + ' 題：' + (isOk ? '✓ 答對' : '✕ 答錯') + '</span>' +
+                          '<span style="color:var(--rose-muted); cursor:pointer;">點擊看解析 ▾</span></div>' +
+                          '<div style="color:var(--rose-deep);">' + q.question + '</div>' +
+                          '<div style="margin-top:4px; display:none; color:var(--rose-muted); border-top:1px dashed #ddd; padding-top:4px;">' +
+                          '<strong>正確解答：' + LETTERS[q.ans] + '</strong><br>' + q.exp + '</div>';
+          (function(r) {
+            r.onclick = function() {
+              var expDiv = r.children[2];
+              expDiv.style.display = (expDiv.style.display === 'none') ? 'block' : 'none';
+            };
+          })(row);
+          list.appendChild(row);
+        }
+
+        saveProgress();
+
+        // 滿分 100 分，及格 80 分
+        var score = correct * 2;
+        var passed = (score >= 80);
+
+        document.getElementById('exam-running').classList.add('hidden');
+        document.getElementById('exam-result').classList.remove('hidden');
+
+        var badge = document.getElementById('exam-pass-badge');
+        if (passed) {
+          badge.style.background = '#d4edda';
+          badge.style.color = '#155724';
+          badge.textContent = '🎉 測驗及格（恭喜達到 80 分以上標準）';
+        } else {
+          badge.style.background = '#f8d7da';
+          badge.style.color = '#721c24';
+          badge.textContent = '❌ 未達及格標準（需滿 80 分）';
+        }
+
+        document.getElementById('res-score').textContent = score;
+        document.getElementById('res-correct').textContent = correct + ' / 50';
+        var spentSec = 5400 - examSeconds;
+        var sm = Math.floor(spentSec / 60);
+        var ss = spentSec % 60;
+        document.getElementById('res-time').textContent = sm + '分' + ss + '秒';
+      }
+
+      document.getElementById('btn-exam-retry').onclick = function() {
+        document.getElementById('exam-result').classList.add('hidden');
+        document.getElementById('exam-intro').classList.remove('hidden');
+      };
+
+      // 初始化啟動
+      updateTopStats();
+      renderPractice();
+    })();
+  </script>
+</body>
+</html>
